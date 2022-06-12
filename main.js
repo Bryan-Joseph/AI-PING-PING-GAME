@@ -1,4 +1,9 @@
+var gameStatus;
 
+var poseNetStatus;
+
+var rwX;
+var rwY;
 /*created by prashant shukla */
 
 var paddle2 =10,paddle1=10;
@@ -7,7 +12,7 @@ var paddle1X = 10,paddle1Height = 110;
 var paddle2Y = 685,paddle2Height = 70;
 
 var score1 = 0, score2 =0;
-var paddle1Y;
+  
 
 var  playerscore =0;
 var audio1;
@@ -22,50 +27,73 @@ var ball = {
 }
 
 function setup(){
-  var canvas =  createCanvas(700,600);
-  canvas.parent("canvHolder");
+  var canv =  createCanvas(700,600);
+  canv.parent("canvHolder");
+
+  var cam = createCapture(VIDEO);
+  cam.size(400,300);
+  cam.parent("cam");
+
+  poseNet = ml5.poseNet(cam,()=>{
+    console.log("model loaded");
+    // poseNetStatus = true;
+  });
+}
+function startGame() {
+  gameStatus = "start";
+  document.getElementById("statusL").innerHTML = "Game is loaded";
 }
 
-
 function draw(){
-
- background(0); 
-
- fill("black");
- stroke("black");
- rect(680,0,20,700);
-
- fill("black");
- stroke("black");
- rect(0,0,20,700);
- 
-   //funtion paddleInCanvas call 
-   paddleInCanvas();
- 
-   //left paddle
-   fill(250,0,0);
-    stroke(0,0,250);
-    strokeWeight(0.5);
-   paddle1Y = mouseY; 
-   rect(paddle1X,paddle1Y,paddle1,paddle1Height,100);
+  if (gameStatus == "start") {
+    poseNet.on("pose",(results)=>{
+      if (results.length > 0) {
+          console.log(results);
+  
+          rwX = results[0].pose.rightWrist.x;
+          rwY = results[0].pose.rightWrist.y;
+      }
+    });
+  
+  
+   background(0); 
+  
+   fill("black");
+   stroke("black");
+   rect(680,0,20,700);
+  
+   fill("black");
+   stroke("black");
+   rect(0,0,20,700);
    
+     //funtion paddleInCanvas call 
+     paddleInCanvas();
    
-    //pc computer paddle
-    fill("#FFA500");
-    stroke("#FFA500");
-   var paddle2y =ball.y-paddle2Height/2;  rect(paddle2Y,paddle2y,paddle2,paddle2Height,100);
-    
-    //function midline call
-    midline();
-    
-    //funtion drawScore call 
-   drawScore();
-   
-   //function models call  
-   models();
-   
-   //function move call which in very important
-    move();
+     //left paddle
+     fill(250,0,0);
+      stroke(0,0,250);
+      strokeWeight(0.5);
+     
+     rect(paddle1X,rwY/300 * 600,paddle1,paddle1Height,100);
+     
+     
+      //pc computer paddle
+      fill("#FFA500");
+      stroke("#FFA500");
+     var paddle2y =ball.y-paddle2Height/2;  rect(paddle2Y,paddle2y,paddle2,paddle2Height,100);
+      
+      //function midline call
+      midline();
+      
+      //funtion drawScore call 
+     drawScore();
+     
+     //function models call  
+     models();
+     
+     //function move call which in very important
+      move();
+  }
 }
 
 
@@ -116,7 +144,7 @@ function move(){
        ball.dx=-ball.dx-0.5;       
    }
   if (ball.x-2.5*ball.r/2< 0){
-  if (ball.y >= paddle1Y&& ball.y <= paddle1Y + paddle1Height) {
+  if (ball.y >= rwY/300 * 600&& ball.y <= rwY/300 * 600 + paddle1Height) {
     ball.dx = -ball.dx+0.5; 
   }
   else{

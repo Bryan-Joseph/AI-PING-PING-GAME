@@ -9,3 +9,13 @@ canvas{
     border:15px ridge blue;
     box-shadow: 1px 1px 36px blue;
 }
+
+#cam{
+    background-image: url(game_console.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    padding-top:19px;
+    padding-bottom:9px;
+}

@@ -22,9 +22,11 @@
     <center>
         <h2 class="bg-warning borderR_20 font-weight-bolder shadow_5 fit_width px-4 py-3 text-white mt-4">AI PING PONG GAME</h2>
         <button data-toggle="modal" data-target="#instructionM" class=" font-weight-bold btn btn-danger shadow_5 fixed_top_right_60_40">Instructions</button>
-        <button class="btn btn-success btn-lg font-weight-bold mt-4 shadow_10">Play</button>
-        <p class="green_neon font_25 fit_width px-3 py-2 mt-4 font-weight-bold">Status:</p>
+        <button onclick="startGame()" class="btn btn-success btn-lg font-weight-bold mt-4 shadow_10">Play</button>
+        <p id="statusL" class="green_neon font_25 fit_width px-3 py-2 mt-4 font-weight-bold">Status:</p>
         <div id="canvHolder" class="mt-4"></div>
+
+        <div id="cam" class="mt-4"></div>
 
         <div class="modal fade" id="instructionM">
             <div class="modal-dialog modal-lg">
