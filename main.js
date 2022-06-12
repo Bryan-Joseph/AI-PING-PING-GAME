@@ -26,6 +26,11 @@ var ball = {
     dy:3
 }
 
+function preload() {
+  paddleHit = loadSound("paddleHit.wav");
+  missed = loadSound("missed.wav");
+}
+
 function setup(){
   var canv =  createCanvas(700,600);
   canv.parent("canvHolder");
@@ -145,9 +150,11 @@ function move(){
    }
   if (ball.x-2.5*ball.r/2< 0){
   if (ball.y >= rwY/300 * 600&& ball.y <= rwY/300 * 600 + paddle1Height) {
-    ball.dx = -ball.dx+0.5; 
+    ball.dx = -ball.dx+0.5;
+    paddleHit.play(); 
   }
   else{
+    missed.play();
     pcscore++;
     reset();
     navigator.vibrate(100);
