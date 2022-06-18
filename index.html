@@ -13,7 +13,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
 
     <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/addons/p5.sound.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/addons/p5.sound.min.js"></script>
+    
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="myStyle.css">
 </head>
@@ -23,6 +25,8 @@
         <h2 class="bg-warning borderR_20 font-weight-bolder shadow_5 fit_width px-4 py-3 text-white mt-4">AI PING PONG GAME</h2>
         <button data-toggle="modal" data-target="#instructionM" class=" font-weight-bold btn btn-danger shadow_5 fixed_top_right_60_40">Instructions</button>
         <button onclick="startGame()" class="btn btn-success btn-lg font-weight-bold mt-4 shadow_10">Play</button>
+        <br>
+        <button onclick="restart()" class="btn btn-danger btn-lg font-weight-bold mt-4 shadow_10">Restart</button>
         <p id="statusL" class="green_neon font_25 fit_width px-3 py-2 mt-4 font-weight-bold">Status:</p>
         <div id="canvHolder" class="mt-4"></div>
 

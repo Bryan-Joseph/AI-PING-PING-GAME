@@ -49,6 +49,13 @@ function startGame() {
   document.getElementById("statusL").innerHTML = "Game is loaded";
 }
 
+function restart(){
+  pcscore = 0;
+  playerscore = 0;
+  loop();
+}
+
+
 function draw(){
   if (gameStatus == "start") {
     poseNet.on("pose",(results)=>{
@@ -168,7 +175,7 @@ if(pcscore ==4){
     stroke("white");
     textSize(25)
     text("Game Over!☹☹",width/2,height/2);
-    text("Reload The Page!",width/2,height/2+30)
+    text("Press The Restart Button!",width/2,height/2+30)
     noLoop();
     pcscore = 0;
 }
